@@ -1158,7 +1158,11 @@ elif args.plot:
                 # title='%s after %dh' % ('TCWV', timestep * single_step_len),
                 coordinate_labels=True,
                 gridline_y_distance=20,
-                gridline_x_distance=20
+                gridline_x_distance=20,
+                extra_contour_field=background_gp_mean_npy[qty_all.index('Z500'), 0],
+                extra_contour_levels=[4000 + 200 * i for i in range(31)],
+                extra_contour_linestyles=[':',':'],
+                extra_contour_colors=['C0','C0'],
             )
             ax2.set_extent([-25, 55, 25, 71], crs=ccrs.PlateCarree())
             # print(ax2.get_xlim())

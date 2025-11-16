@@ -395,7 +395,8 @@ def plot_Earth(fig,
                coastlines_linewidth=None,
                coordinate_labels=False,
                plot_type='pcolormesh',
-               contourf_levels=10
+               contourf_levels=10,
+               coastlines_color='k'
                ):
     import numpy as np
     import matplotlib.pyplot as plt
@@ -414,9 +415,9 @@ def plot_Earth(fig,
         ax.scatter(obs_locs[0][0], obs_locs[1][0], c='gold', edgecolor='k', s=obs_s, marker='*', transform=ccrs.PlateCarree(), zorder=1000)
     ax.set_global()
     if coastlines_linewidth:
-        ax.coastlines(linewidth=coastlines_linewidth)
+        ax.coastlines(linewidth=coastlines_linewidth, color=coastlines_color)
     else:
-        ax.coastlines()
+        ax.coastlines(color=coastlines_color)
     #if not coordinate_labels:
     gl = ax.gridlines()
     if coordinate_labels:
@@ -444,10 +445,17 @@ def plot_Earth(fig,
         # else:
         #     ax.quiverkey(Q, 0.97, -0.10, 10, r'$10\,\frac{\mathrm{m}}{\mathrm{s}}$', labelpos='W')
 
-
     if len(extra_contour_field) > 0:
-        ax.contour(lons, lats, extra_contour_field, levels=[i for i in extra_contour_levels if i < 0], colors=[extra_contour_colors[0] for i in extra_contour_levels if i<0], linestyles=extra_contour_linestyles[0], linewidths=extra_contour_linewidths, transform=ccrs.PlateCarree())
-        ax.contour(lons, lats, extra_contour_field, levels=[i for i in extra_contour_levels if i > 0 ], colors=[extra_contour_colors[1] for i in extra_contour_levels if i<0], linestyles=extra_contour_linestyles[1], linewidths=extra_contour_linewidths, transform=ccrs.PlateCarree())
+        if min(extra_contour_levels) < 0:
+            ax.contour(lons, lats, extra_contour_field, levels=[i for i in extra_contour_levels if i < 0],
+                       colors=[extra_contour_colors[0] for i in extra_contour_levels if i < 0],
+                       linestyles=extra_contour_linestyles[0], linewidths=extra_contour_linewidths,
+                       transform=ccrs.PlateCarree())
+        if max(extra_contour_levels) > 0:
+            ax.contour(lons, lats, extra_contour_field, levels=[i for i in extra_contour_levels if i > 0],
+                       colors=[extra_contour_colors[1] for i in extra_contour_levels if i > 0],
+                       linestyles=extra_contour_linestyles[1], linewidths=extra_contour_linewidths,
+                       transform=ccrs.PlateCarree())
 
     if title_loc:
         if title_loc == 'left':
