@@ -1,3 +1,9 @@
+## Introduction
+
+This repository contains software for the following paper: https://doi.org/10.1029/2025MS005360
+
+## Quick user guide
+
 The trained weights for the neural networks are available at: https://zenodo.org/records/15706040
 Download them and store the pth files to:
 - NNs/models/U-Net_IT_ALL_numpred2_train_sumMSE_testACC_isl1_250ch_ks7x7_1hr_parallel_2024_11 (for U-Net)
@@ -18,3 +24,15 @@ The B-matrices may be recomputed using the scripts in B-matrix folder. Their dia
 - NNs/models/autoencoder_20_12100/EDA/B-matrices/ens_B
 
 The yaml file for conda vitual environment that we used for our research is given in UGNN3DVar_conda_virtualenv.yml.
+
+## Citation
+
+If you use this code or data in academic work, please cite:
+
+1. The software:
+   > Boštjan Melinc, and Uroš Perkan (2026). *UnifiedGlobalNN3DVar*.
+   > DOI: 10.5281/zenodo.18242563
+
+2. The associated paper:
+   > Boštjan Melinc, Uroš Perkan, and Žiga Zaplotnik (2026). A unified neural background-error covariance model for midlatitude and tropical atmospheric data assimilation, *Journal of Advances in Modeling Earth Systems*.
+   > DOI: 10.1029/2025MS005360
